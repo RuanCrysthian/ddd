@@ -1,2 +1,1 @@
-# ddd
- Repositório destinado ao estudo de Domain Driven Design
+# Domain Driven Design
