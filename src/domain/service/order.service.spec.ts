@@ -25,4 +25,12 @@ describe("Order service unit test", () => {
     expect(customer.rewardPoints).toBe(5);
     expect(order.total()).toBe(10);
   });
+
+  it("should throw error when orderItem is empty", () => {
+    const customer = new Customer("c1", "Customer 1");
+
+    expect(() => OrderService.placeOrder(customer, [])).toThrow(
+      "An order must have at least one item"
+    );
+  });
 });
