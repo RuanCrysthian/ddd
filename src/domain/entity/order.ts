@@ -38,4 +38,14 @@ export default class Order {
   get items(): OrderItem[] {
     return this._items;
   }
+
+  addItem(item: OrderItem): void {
+    this._items.push(item);
+    this._total = this.total();
+  }
+
+  removeItem(id: string): void {
+    this._items = this._items.filter((item) => item.id !== id);
+    this._total = this.total();
+  }
 }
