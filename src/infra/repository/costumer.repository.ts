@@ -48,6 +48,7 @@ export default class CustomerRepository implements CustomerRepositoryInterface {
     } catch (error) {
       throw new Error("Customer not found");
     }
+
     const customer = new Customer(id, customerModel.name);
     const address = new Address(
       customerModel.street,
@@ -61,6 +62,7 @@ export default class CustomerRepository implements CustomerRepositoryInterface {
 
   async findAll(): Promise<Customer[]> {
     const customerModels = await CustomerModel.findAll();
+
     const customers = customerModels.map((customerModels) => {
       let customer = new Customer(customerModels.id, customerModels.name);
       customer.addRewardPoints(customerModels.rewardPoints);
@@ -76,6 +78,7 @@ export default class CustomerRepository implements CustomerRepositoryInterface {
       }
       return customer;
     });
+
     return customers;
   }
 }

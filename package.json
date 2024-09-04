@@ -2,7 +2,7 @@
   "devDependencies": {
     "@rocketseat/eslint-config": "^2.2.2",
     "@swc/cli": "^0.4.0",
-    "@swc/core": "^1.7.14",
+    "@swc/core": "^1.7.23",
     "@swc/jest": "^0.2.36",
     "@types/jest": "^29.5.12",
     "eslint": "^8.57.0",
@@ -13,7 +13,8 @@
     "typescript": "^5.5.4"
   },
   "scripts": {
-    "test": "jest",
+    "test": "npm run tsc -- --noEmit && jest",
+    "tsc": "tsc",
     "test-coverage": "jest --coverage"
   },
   "dependencies": {
