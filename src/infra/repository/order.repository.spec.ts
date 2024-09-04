@@ -71,4 +71,47 @@ describe("Order repository test", () => {
       ],
     });
   });
+
+  it("should find an order by id", async () => {
+    const productRepository = new ProductRepository();
+    const product = new Product("123", "Product 1", 10);
+    const product2 = new Product("1234", "Product 4", 20);
+    await productRepository.create(product);
+    await productRepository.create(product2);
+
+    const orderItem = new OrderItem(
+      "1",
+      product.id,
+      product.name,
+      product.price,
+      2
+    );
+    const orderItem2 = new OrderItem(
+      "2",
+      product2.id,
+      product2.name,
+      product2.price,
+      2
+    );
+
+    const order = new Order("123", "123", [orderItem, orderItem2]);
+
+    const orderRepository = new OrderRepository();
+    await orderRepository.create(order);
+
+    console.log("order", order);
+
+    const foundOrder = await orderRepository.find(order.id);
+    console.log("foundOrder", foundOrder);
+
+    expect(foundOrder).toEqual(order);
+  });
+
+  it("should not find an order by id", async () => {
+    const orderRepository = new OrderRepository();
+
+    expect(async () => {
+      await orderRepository.find("123");
+    }).rejects.toThrow("Order not found");
+  });
 });
